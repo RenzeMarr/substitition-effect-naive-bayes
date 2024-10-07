@@ -50,9 +50,9 @@ unnormalized AS (
         prior
 ),
 
--- Step 3: Normalize the posterior probabilities to sum to 1 for each transaction
+-- Normalize the posterior probabilities to sum to 1 for each transaction
 -- Here we divide the un-normalized posterior by the normalization constant,
--- which is the sum of all un-normalized posteriors (see the above example for more details)
+-- which is the sum of all un-normalized posteriors
 normalized AS (
     SELECT
         substitution_group_id,
@@ -63,7 +63,7 @@ normalized AS (
     FROM unnormalized
 ),
 
--- Step 4: Compute unnormalized posterior probabilities where availability is always true
+-- Compute unnormalized posterior probabilities where availability is always true
 unnormalized_available_true AS (
   SELECT
     substitution_group_id,
