@@ -2,13 +2,18 @@
 
 ## Overview
 
-In this project, we apply a **Naive Bayes** model in SQL to correct sales data for **substitution effects**. 
-The substitution effect occurs when certain products are out of stock, causing customers to purchase 
-alternative products (substitutes). By accounting for these substitution patterns, we get a better
-estimation of the true demand. 
+In this notebook, we will use **Naive Bayes**—a probabilistic model based on Bayes' theorem—to adjust 
+transaction quantities by considering how stock-outs influence purchasing behavior. 
+Specifically, we will focus on how the probability of purchasing Product A (e.g., lemons) 
+changes when Product B (e.g., limes) is out of stock. This model allows us to calculate a 
+correction ratio that adjusts the observed sales data, enabling us to more closely estimate the true demand of a product.
 
-We implement the entire solution using SQL, breaking down the problem into manageable components 
-including the prior probabilities, likelihoods, and posterior probabilities.
+The correction ratio is the ratio between two posterior probabilities:
+
+- The probability of purchasing Product A when all products are available.
+- The probability of purchasing Product A when Product B is out of stock.
+
+For example, if the probability of purchasing lemons is 0.5 when limes are available but increases to 0.8 when limes are out of stock, we can adjust the lemon transactions by applying a correction factor of 0.5 / 0.8 = 0.625.
 
 ## Motivation
 Retailers, especially large ones like Albert Heijn, benefit from uncontraining the demand to make accurate forecasts. 
