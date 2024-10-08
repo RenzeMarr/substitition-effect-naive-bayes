@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS transactions_corrected AS
 
 SELECT
     transaction_id,
+    product_id,
+    product_name,
     sales_date_time,
     posteriors.substitution_correction_ratio * quantity_sold AS quantity,
     -- For comparison purposes we keep the original quantity and adjusted quantity
