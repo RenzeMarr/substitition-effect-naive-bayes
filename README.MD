@@ -2,19 +2,31 @@
 
 ## Overview
 
-In this project, we apply a Naive Bayes model in SQL to capture substitution effects. 
-The substitution effect occurs when products go out of stock, and customers switch to alternative products (substitutes).
+In this project, we apply a Naive Bayes model in SQL to correct sales data for substitution effects. 
+The substitution effect occurs when certain products are out of stock, causing customers to purchase 
+alternative products (substitutes). By accounting for these substitution patterns, we get a better
+estimation of the true demand. 
 
-We implement the entire solution in SQL, breaking down the problem into manageable components.
+We implement the entire solution using SQL, breaking down the problem into manageable components 
+including the prior probabilities, likelihoods, and posterior probabilities.
 
-## Structure / How it works
+## Motivation
+Retailers, especially large ones like Albert Heijn, benefit from uncontraining the demand to make accurate forecasts. 
+This project offers a practical solution by "unconstraining" the demand, adjusting the observed sales
+to reflect what would have happened if all products had been available.
 
-**Input**: Transaction data, product availability data, ...
+## Structure
 
-**Naive Bayes**:
+- notebook.ipynb: A Jupyter notebook that walks through the Naive Bayes calculations step by step, explaining how to compute priors, likelihoods, posteriors, and how to apply the substitution correction to transaction data.
+- input_data/: Example transaction and product data that serves as input to the model.
+- naive_bayes/: Scripts implementing the Naive Bayes calculations in SQL.
+- output_data/: Corrected sales data that reflects true demand, adjusted for substitution effects.
 
-- Priors: We calculate the prior probabilities of buying each product.
-- Likelihoods: We compute the likelihoods of a product being chosen given that other products are available or unavailable (to model substitution behavior).
-- Posterior: Using these priors and likelihoods, we calculate the posterior probabilities of buying substitute products when the preferred product is unavailable.
+## Example
 
-**Output**: The final probabilities are used to correct sales for the substitution effects found.
+In the notebook, we walk through an example involving lemons and limes. If limes are out of stock, customers may switch to lemons, leading to inflated lemon sales. By applying the Naive Bayes model, we correct the lemon sales to reflect what the demand would have been if limes were in stock.
+
+For instance:
+
+- Observed sales: 3 lemons sold when limes are out of stock.
+- Corrected sales: Applying a substitution correction ratio of 0.577, the true demand for lemons is estimated at 1.731.
